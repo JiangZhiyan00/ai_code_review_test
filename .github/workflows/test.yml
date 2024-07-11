@@ -15,5 +15,6 @@ jobs:
 
       - name: Run script on master branch push
         run: |
+          apt-get update && apt-get install -y git
           chmod +x test.sh
-          test.sh
+          ./test.sh
