@@ -27,8 +27,8 @@ jobs:
           wget -O ./libs/ai-code-review.jar https://github.com/JiangZhiyan00/ai-code-review-sdk/releases/download/1.0.0/ai-code-review.jar
 
       - name: Get And Save Git diff To Env
-        run: |
-          git diff HEAD~1 HEAD >> $GIT_DIFF
+        id: git-diff-content
+        run: echo "GIT_DIFF=$(git diff HEAD~1 HEAD)" >> $GITHUB_ENV
 
       - name: Get repository name
         id: repo-name
