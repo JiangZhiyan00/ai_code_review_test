@@ -24,7 +24,7 @@ jobs:
       - name: Download ai-code-review jar to libs directory
         run: |
           mkdir -p ./libs
-          wget -O ./libs/ai-code-review.jar https://github.com/JiangZhiyan00/ai-code-review-sdk/releases/download/1.0.0/ai-code-review.jar
+          wget -O ./libs/ai-code-review.jar https://github.com/JiangZhiyan00/ai-code-review-sdk/releases/download/1.0.0/ai-code-review-with-dependencies.jar
 
       - name: Save Git Diff File, Add File Path To Env
         id: git-diff-content
