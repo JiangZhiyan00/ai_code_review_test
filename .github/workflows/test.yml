@@ -61,7 +61,7 @@ jobs:
           echo "Api Key is ${{ secrets.CHATGLM_API_KEY }}"
 
       - name: Run Code Review
-        run: java -jar ./libs/ai-code-review.jar
+        run: java -Duser.timezone=Asia/Shanghai -jar ./libs/ai-code-review.jar
         env:
           # Github 配置；GITHUB_REVIEW_LOG_URI「https://github.com/xfg-studio-project/openai-code-review-log」、GITHUB_TOKEN「https://github.com/settings/tokens」
           CODE_REVIEW_LOG_URL: ${{ secrets.CODE_REVIEW_LOG_URL }}
