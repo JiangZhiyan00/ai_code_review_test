@@ -1,0 +1,19 @@
+name: Run Script on Master Push
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Run script on master branch push
+        run: |
+          chmod +x ./path/to/your/script.sh
+          ../../test.sh
