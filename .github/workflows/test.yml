@@ -28,7 +28,7 @@ jobs:
 
       - name: Get And Save Git diff To Env
         run: |
-          git diff HEAD~1 HEAD > $GIT_DIFF
+          git diff HEAD~1 HEAD >> $GIT_DIFF
 
       - name: Get repository name
         id: repo-name
