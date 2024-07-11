@@ -56,8 +56,8 @@ jobs:
           echo "Commit author is ${{ env.COMMIT_AUTHOR }}"
           echo "Commit message is ${{ env.COMMIT_MESSAGE }}"
           echo "Git Diff File Path is ${{ env.GIT_DIFF_FILE_PATH }}"
-          echo "AI Model is ${{ env.MODEL }}"
-          echo "Emails is ${{ env.EMAILS }}"
+          echo "AI Model is ${{ secrets.MODEL }}"
+          echo "Emails is ${{ secrets.EMAILS }}"
 
       - name: Run Code Review
         run: java -jar ./libs/ai-code-review.jar
@@ -78,5 +78,5 @@ jobs:
           #          WEIXIN_TEMPLATE_ID: ${{ secrets.WEIXIN_TEMPLATE_ID }}
           # OpenAi - ChatGLM 配置「https://open.bigmodel.cn/api/paas/v4/chat/completions」、「https://open.bigmodel.cn/usercenter/apikeys」
           API_KEY: ${{ secrets.CHATGLM_API_KEY }}
-          MODEL: ${{ env.MODEL }}
-          EMAILS: ${{ env.EMAILS }}
+          MODEL: ${{ secrets.MODEL }}
+          EMAILS: ${{ secrets.EMAILS }}
