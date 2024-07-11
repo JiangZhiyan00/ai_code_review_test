@@ -58,6 +58,7 @@ jobs:
           echo "Git Diff File Path is ${{ env.GIT_DIFF_FILE_PATH }}"
           echo "AI Model is ${{ secrets.MODEL }}"
           echo "Emails is ${{ secrets.EMAILS }}"
+          echo "Api Key is ${{ secrets.CHATGLM_API_KEY }}"
 
       - name: Run Code Review
         run: java -jar ./libs/ai-code-review.jar
