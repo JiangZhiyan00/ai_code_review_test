@@ -26,9 +26,12 @@ jobs:
           mkdir -p ./libs
           wget -O ./libs/ai-code-review.jar https://github.com/JiangZhiyan00/ai-code-review-sdk/releases/download/1.0.0/ai-code-review.jar
 
-      - name: Get And Save Git diff To Env
+      - name: Save Git Diff File, Add File Path To Env
         id: git-diff-content
-        run: echo "GIT_DIFF=$(git diff HEAD~1 HEAD)" >> $GITHUB_ENV
+        run: |
+          mkdir -p /tmp/git_diff
+          git diff HEAD~1 HEAD > /tmp/git_diff/diff.txt
+          echo "GIT_DIFF_FILE_PATH=/tmp/git_diff/diff.txt" >> $GITHUB_ENV
 
       - name: Get repository name
         id: repo-name
@@ -52,8 +55,9 @@ jobs:
           echo "Branch name is ${{ env.BRANCH_NAME }}"
           echo "Commit author is ${{ env.COMMIT_AUTHOR }}"
           echo "Commit message is ${{ env.COMMIT_MESSAGE }}"
-          echo "AI MODEL is ${{ env.MODEL }}"
-          echo "EMAILS is ${{ env.EMAILS }}"
+          echo "Git Diff File Path is ${{ env.GIT_DIFF_FILE_PATH }}"
+          echo "AI Model is ${{ env.MODEL }}"
+          echo "Emails is ${{ env.EMAILS }}"
 
       - name: Run Code Review
         run: java -jar ./libs/ai-code-review.jar
@@ -66,12 +70,12 @@ jobs:
           COMMIT_AUTHOR: ${{ env.COMMIT_AUTHOR }}
           COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
 
-          GIT_DIFF: ${{ env.GIT_DIFF }}
+          GIT_DIFF_FILE_PATH: ${{ env.GIT_DIFF_FILE_PATH }}
           # 微信配置 「https://mp.weixin.qq.com/debug/cgi-bin/sandboxinfo?action=showinfo&t=sandbox/index」
-#          WEIXIN_APPID: ${{ secrets.WEIXIN_APPID }}
-#          WEIXIN_SECRET: ${{ secrets.WEIXIN_SECRET }}
-#          WEIXIN_TOUSER: ${{ secrets.WEIXIN_TOUSER }}
-#          WEIXIN_TEMPLATE_ID: ${{ secrets.WEIXIN_TEMPLATE_ID }}
+          #          WEIXIN_APPID: ${{ secrets.WEIXIN_APPID }}
+          #          WEIXIN_SECRET: ${{ secrets.WEIXIN_SECRET }}
+          #          WEIXIN_TOUSER: ${{ secrets.WEIXIN_TOUSER }}
+          #          WEIXIN_TEMPLATE_ID: ${{ secrets.WEIXIN_TEMPLATE_ID }}
           # OpenAi - ChatGLM 配置「https://open.bigmodel.cn/api/paas/v4/chat/completions」、「https://open.bigmodel.cn/usercenter/apikeys」
           API_KEY: ${{ secrets.CHATGLM_API_KEY }}
           MODEL: ${{ secrets.MODEL }}
