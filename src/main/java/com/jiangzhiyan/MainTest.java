@@ -2,7 +2,9 @@ package com.jiangzhiyan;
 
 public class MainTest {
     public static void main(String[] args) {
-        //打印文本
-        System.out.println("Hello 213!");
+        //循环打印文本
+        for (int i = 0; i < 10; i++) {
+            System.out.println("Hello! " + i);
+        }
     }
 }
