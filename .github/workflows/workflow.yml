@@ -62,11 +62,13 @@ jobs:
         id: commit-message
         run: echo "COMMIT_MESSAGE=$(git log -1 --pretty=format:'%s')" >> $GITHUB_ENV
 
+      # 设置代码评审记录仓库缓存目录环境变量
+      - name: Set Review Record Repository Cache Dir
+        run: echo "CODE_REVIEW_LOG_REPO_CACHE_DIR=${{ github.workspace }}/cached-review-log-repo" >> $GITHUB_ENV
+
       # 缓存代码评审记录仓库目录
-      - name: Cache Review Record repository
+      - name: Cache Review Record Repository
         uses: actions/cache@v4
-        env:
-          CODE_REVIEW_LOG_REPO_CACHE_DIR: ${{ github.workspace }}/cached-review-log-repo
         with:
           path: ${{ env.CODE_REVIEW_LOG_REPO_CACHE_DIR }}
           key: ${{ runner.os }}-repo-${{ vars.CODE_REVIEW_LOG_URL }}
